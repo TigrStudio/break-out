@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends RigidBody2D
+
+
+
+
+func _on_Ball_2_body_entered(body: Node) -> void:
+	if body.is_in_group(\"panel\"):
+		apply_central_impulse(Vector2(0,-200))
+"
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 16, 16 )
+
+[node name="Ball_2" type="RigidBody2D"]
+contacts_reported = 1
+contact_monitor = true
+script = SubResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0, 0.54902, 1, 1 )
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_Ball_2_body_entered"]

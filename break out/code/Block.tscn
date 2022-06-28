@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://art/rectangles.png" type="Texture" id=1]
+[ext_resource path="res://code/Block.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 16 )
+
+[node name="Block" type="Area2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 0.0431373, 0.0588235, 1 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2( 32, 16 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_Block_body_entered"]
